@@ -1,0 +1,60 @@
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Select State</mat-label>
+    <mat-select (selectionChange)="stateChange($event)">
+      <mat-option *ngFor="let state of States.states" [value]="state.state_id">
+        {{state.state_name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Select Districts</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let dist of Districts.districts" [value]="dist.district_id">
+        {{dist.district_name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<section>
+  <div>
+    <button mat-raised-button color="primary" (click)="findByDistrict()">Search</button>
+  </div>
+</section>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> Weight </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Symbol </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+
+<router-outlet></router-outlet>
