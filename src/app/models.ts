@@ -11,10 +11,14 @@ export interface Districts{
 }
 
 export interface SessionsData{
-    sessions?:any[]
+    sessions:AvailableSession[]
 }
 
 export interface AvailableSession{
-    
+    name:string,
+    address:string,
+    pincode:string,
+    available_capacity:string
+   
 }
 
