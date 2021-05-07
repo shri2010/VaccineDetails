@@ -36,12 +36,21 @@ export class CowinService {
 
    findByDistrict(id:number, date: string): Observable<any>{
 
-    return this.httpClient.get<any[]>("https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id="+512+"&date="+ date).pipe(
+    return this.httpClient.get<any[]>("https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id="+id+"&date="+ date).pipe(
        tap(_ => console.log('fetched by districts')),
        catchError(this.handleError<any>('getStates', []))
  
      );
     }
+
+    findByPincode(pincode:string, date: string): Observable<any>{
+
+      return this.httpClient.get<any[]>("https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode="+pincode+"&date="+ date).pipe(
+         tap(_ => console.log('fetched by districts')),
+         catchError(this.handleError<any>('getStates', []))
+   
+       );
+      }
 
    private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

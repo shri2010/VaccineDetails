@@ -14,7 +14,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -30,13 +31,13 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatTableModule,
     CdkTableModule,
     MatDatepickerModule,
-    MatMomentDateModule,
     MatInputModule,
     MatIconModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
