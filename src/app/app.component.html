@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="#">Find Vaccine Portal</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -9,69 +10,68 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-       
+        
       </ul>
-     
+
     </div>
   </div>
 </nav>
-<div>
-  <mat-form-field appearance="fill" class="dropdown-menu">
-    <mat-label>Please Select Options</mat-label>
-    <mat-select (selectionChange)="stateChange($event)" [(ngModel)]="value">
-      <mat-option *ngFor="let option of Options" [value]="option.id">
-        {{option.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-<div>
-  <mat-form-field appearance="fill" class="dropdown-menu">
-    <mat-label>Select State</mat-label>
-    <mat-select (selectionChange)="stateChange($event)">
-      <mat-option *ngFor="let state of States.states" [value]="state.state_id">
-        {{state.state_name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-<div>
-  <mat-form-field appearance="fill">
-    <mat-label>Select Districts</mat-label>
-    <mat-select [(ngModel)]="selectedDistrict">
-      <mat-option *ngFor="let dist of Districts.districts" [value]="dist.district_id">
-        {{dist.district_name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-<div>
-  <mat-form-field appearance="fill" class="dropdown-menu">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="dateValue">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-</div>
-<div>
-  <mat-form-field class="example-form-field">
-    <mat-label>Pincode</mat-label>
-    <input matInput type="text" [(ngModel)]="pincode">
-    <button mat-button *ngIf="pincode" matSuffix mat-icon-button aria-label="Clear" (click)="pincode=''">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
-</div>
-<section>
-  <div>
-    <button mat-raised-button class="btn btn-primary" (click)="findByDistrict()">Search</button>
+<div class="jumbotron pb-4">
+  <div class="container">
+    <div>
+      <mat-form-field appearance="fill" class="p-2">
+        <mat-label>Please Select Options</mat-label>
+        <mat-select (selectionChange)="stateChange($event)" [(ngModel)]="value">
+          <mat-option *ngFor="let option of Options" [value]="option.id">
+            {{option.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill" class="p-2" *ngIf="value == 1">
+        <mat-label>Select State</mat-label>
+        <mat-select (selectionChange)="stateChange($event)">
+          <mat-option *ngFor="let state of States.states" [value]="state.state_id">
+            {{state.state_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="p-2" *ngIf="value == 1">
+        <mat-label>Select Districts</mat-label>
+        <mat-select [(ngModel)]="selectedDistrict">
+          <mat-option *ngFor="let dist of Districts.districts" [value]="dist.district_id">
+            {{dist.district_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="p-2" *ngIf="value == 1 || value == 2">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="dateValue">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="p-2" *ngIf="value == 2">
+        <mat-label>Pincode</mat-label>
+        <input matInput type="text" [(ngModel)]="pincode">
+        <button mat-button *ngIf="pincode" matSuffix mat-icon-button aria-label="Clear" (click)="pincode=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <section>
+      <div class="text-center">
+        <button mat-raised-button class="btn btn-primary" (click)="findByDistrict()" >Search</button>
+      </div>
+    </section>
   </div>
-</section>
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
+</div>
+<div class="mat-elevation-z8 container" *ngIf="this.dataSource?.data ">
+
+  <table mat-table [dataSource]="dataSource" matSort>
 
     <!-- Position Column -->
     <ng-container matColumnDef="name">

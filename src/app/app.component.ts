@@ -1,8 +1,11 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { retryWhen } from 'rxjs/operators';
 import { Districts, States, SessionsData, AvailableSession } from './models';
 import { CowinService } from './Services/cowin.service';
 
@@ -15,8 +18,9 @@ import { CowinService } from './Services/cowin.service';
 export class AppComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'address', 'pincode', 'available_capacity'];
-  dataSource: AvailableSession[] = [];
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
+  dataSource: MatTableDataSource<AvailableSession>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   title = 'VaccineInfoApp';
   States: States = {};
   Districts: Districts = {};
@@ -27,7 +31,9 @@ export class AppComponent implements OnInit {
   dateValue: any;
   Options: any[] = [{ id: 1, name: 'By District' }, { id: 2, name: 'By Pincode' }];
 
-  constructor(private cowinService: CowinService, private datePipe: DatePipe) {
+
+  constructor(private cowinService: CowinService, private datePipe: DatePipe
+    , private toast: MatSnackBar) {
 
 
   }
@@ -36,7 +42,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     this.cowinService.getStates().subscribe(
-
       {
         next: (result: States) => {
           debugger;
@@ -62,35 +67,58 @@ export class AppComponent implements OnInit {
   }
 
   findByDistrict() {
-    var date = this.datePipe.transform(this.dateValue, 'dd-MM-yy') || '';
+    if (this.value === 0) {
+      this.toast.open('Please Select Option', '', { horizontalPosition: 'right', verticalPosition: 'top', duration:750 });
 
+    }
+    else if (this.value === 1) {
 
-    if (this.value === 1) {
-      this.cowinService.findByDistrict(this.selectedDistrict, date).subscribe(
-        {
-          next: (result: SessionsData) => {
-            debugger;
-            this.dataSource = result.sessions;
-            console.log(result);
-          },
-          error: (result: any) => console.log(result)
-        });
+      if (this.selectedDistrict === 0) {
+        this.toast.open('Please Select District', '', { horizontalPosition: 'right', verticalPosition: 'top' , duration:750});
+
+      }
+
+      else {
+        var date = this.datePipe.transform(this.dateValue, 'dd-MM-yy') || '';
+
+        this.cowinService.findByDistrict(this.selectedDistrict, date).subscribe(
+          {
+            next: (result: SessionsData) => {
+              debugger;
+              this.dataSource = new MatTableDataSource(result.sessions);
+
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+              console.log(result);
+            },
+            error: (result: any) => console.log(result)
+          });
+      }
 
     } else if (this.value === 2) {
-      this.cowinService.findByPincode(this.pincode, date).subscribe(
-        {
-          next: (result: SessionsData) => {
-            debugger;
-            this.dataSource = result.sessions;
-            console.log(result);
-          },
-          error: (result: any) => console.log(result)
-        });
+      if (this.pincode === '' || this.pincode === undefined) {
+        this.toast.open('Please Provide Pincode', '', { horizontalPosition: 'right', verticalPosition: 'top', duration:750 });
+
+      }
+      else {
+        var date = this.datePipe.transform(this.dateValue, 'dd-MM-yy') || '';
+
+        this.cowinService.findByPincode(this.pincode, date).subscribe(
+          {
+            next: (result: SessionsData) => {
+              debugger;
+              this.dataSource = new MatTableDataSource(result.sessions);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+
+
+              console.log(result);
+            },
+            error: (result: any) => console.log(result)
+          });
+      }
     }
 
-
-
-
-
   }
+
 }
