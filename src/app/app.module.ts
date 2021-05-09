@@ -13,6 +13,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -38,7 +39,8 @@ import { DatePipe } from '@angular/common';
     ReactiveFormsModule,
     MatNativeDateModule,
     MatSnackBarModule,
-    FormsModule
+    FormsModule,
+    MatBadgeModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

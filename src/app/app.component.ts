@@ -17,7 +17,7 @@ import { CowinService } from './Services/cowin.service';
 })
 export class AppComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'address', 'pincode', 'available_capacity'];
+  displayedColumns: string[] = ['name', 'slots', 'fee', 'vaccine'];
   dataSource: MatTableDataSource<AvailableSession>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
