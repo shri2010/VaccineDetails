@@ -18,10 +18,12 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { VaccineDetailsComponent } from './vaccine-details/vaccine-details.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VaccineDetailsComponent
   ],
   imports: [
     BrowserModule,
