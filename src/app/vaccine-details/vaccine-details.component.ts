@@ -42,7 +42,7 @@ export class VaccineDetailsComponent implements OnInit {
     this.cowinService.getStates().subscribe(
       {
         next: (result: States) => {
-          debugger;
+          
           this.States = result;
           console.log(result);
         },
@@ -56,7 +56,7 @@ export class VaccineDetailsComponent implements OnInit {
 
       {
         next: (result: Districts) => {
-          debugger;
+          
           this.Districts = result;
           console.log(result);
         },
@@ -82,7 +82,7 @@ export class VaccineDetailsComponent implements OnInit {
         this.cowinService.findByDistrict(this.selectedDistrict, date).subscribe(
           {
             next: (result: SessionsData) => {
-              debugger;
+              
               this.dataSource = new MatTableDataSource(result.sessions);
 
               this.dataSource.paginator = this.paginator;
@@ -104,7 +104,7 @@ export class VaccineDetailsComponent implements OnInit {
         this.cowinService.findByPincode(this.pincode, date).subscribe(
           {
             next: (result: SessionsData) => {
-              debugger;
+              
               this.dataSource = new MatTableDataSource(result.sessions);
               this.dataSource.paginator = this.paginator;
               this.dataSource.sort = this.sort;
