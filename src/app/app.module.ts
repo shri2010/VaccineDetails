@@ -14,16 +14,20 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { VaccineDetailsComponent } from './vaccine-details/vaccine-details.component';
+import { HospitalsIndiaComponent } from './hospitals-india/hospitals-india.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VaccineDetailsComponent
+    VaccineDetailsComponent,
+    HospitalsIndiaComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,9 @@ import { VaccineDetailsComponent } from './vaccine-details/vaccine-details.compo
     MatNativeDateModule,
     MatSnackBarModule,
     FormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatProgressSpinnerModule,
+    MatSortModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
