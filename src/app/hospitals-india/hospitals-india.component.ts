@@ -42,7 +42,7 @@ export class HospitalsIndiaComponent  implements AfterViewInit {
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
           this.resultsLength = data.total;
-          debugger;
+          
           return data.records;
         }),
         catchError(() => {

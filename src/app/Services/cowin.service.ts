@@ -51,9 +51,8 @@ export class CowinService {
    
        );
       }
-//https://api.data.gov.in/resource/de59e770-2333-4eaf-9088-a3643de040c8?api-key=579b464db66ec23bdd0000013df5126015d64ea56826832985af680a&format=json&limit=10&offset=3
       getHospitals(sort: string, order: string, page: number): Observable<any> {
-        debugger;
+        
         var limit = 10*(page+1);
         const requestUrl =
             `https://api.data.gov.in/resource/de59e770-2333-4eaf-9088-a3643de040c8?api-key=579b464db66ec23bdd0000013df5126015d64ea56826832985af680a&format=json&limit=10&offset=${limit + 1}`;
@@ -69,7 +68,7 @@ export class CowinService {
 
    private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-  debugger;
+ 
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
