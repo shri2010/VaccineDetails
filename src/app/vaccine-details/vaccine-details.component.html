@@ -1,93 +1,105 @@
 <div class="jumbotron pb-4">
-    <div class="container">
-      <div class="row">
-        
-        <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-6">
-          <mat-label>Please Select Options</mat-label>
-          <mat-select (selectionChange)="stateChange($event)" [(ngModel)]="value" >
-            <mat-option *ngFor="let option of Options" [value]="option.id">
-              {{option.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-6 col-10">
+        <ngx-charts-pie-grid [view]="view" [scheme]="colorScheme" [results]="single" (select)="onSelect($event)">
+        </ngx-charts-pie-grid>
       </div>
-      <div class="row">
-  
-        <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-3" *ngIf="value == 1">
-          <mat-label>Select State</mat-label>
-          <mat-select (selectionChange)="stateChange($event)">
-            <mat-option *ngFor="let state of States.states" [value]="state.state_id">
-              {{state.state_name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-  
-        <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-3" *ngIf="value == 1">
-          <mat-label>Select Districts</mat-label>
-          <mat-select [(ngModel)]="selectedDistrict">
-            <mat-option *ngFor="let dist of Districts.districts" [value]="dist.district_id">
-              {{dist.district_name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-  
-        <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-3" *ngIf="value == 1 || value == 2">
-          <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker" [(ngModel)]="dateValue">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-  
-        <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-3" *ngIf="value == 2">
-          <mat-label>Pincode</mat-label>
-          <input matInput type="text" [(ngModel)]="pincode">
-          <button mat-button *ngIf="pincode" matSuffix mat-icon-button aria-label="Clear" (click)="pincode=''">
-            <mat-icon>close</mat-icon>
-          </button>
-        </mat-form-field>
-      </div>
-      <section>
-        <div class="row justify-content-center">
-          <div >
-          <button mat-raised-button class="btn btn-primary" (click)="findByDistrict()" *ngIf="value == 1 || value == 2">Search</button>
-        </div>
-        </div>
-      </section>
     </div>
   </div>
-  <div class="mat-elevation-z8 container" *ngIf="this.dataSource?.data ">
-  
-    <table mat-table [dataSource]="dataSource" matSort>
-  
-      <!-- Position Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef class="text-primary fw-bolder fs-6"> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}}, {{element.address}}</td>
-      </ng-container>
-  
-      <!-- Name Column -->
-      <ng-container matColumnDef="slots">
-        <th mat-header-cell *matHeaderCellDef class="text-primary fw-bolder fs-6"> Slots </th>
-        <td mat-cell *matCellDef="let element"> {{element.slots}} </td>
-      </ng-container>
-  
-      <!-- Weight Column -->
-      <ng-container matColumnDef="fee">
-        <th mat-header-cell *matHeaderCellDef class="text-primary fw-bolder fs-6"> Fee </th>
-        <td mat-cell *matCellDef="let element"><span class="badge rounded-pill bg-success">{{element.fee_type}}</span>
-          <span *ngIf="element.fee > 0" matBadge="{{element.fee}}" matBadgeOverlap="false">  </span></td>
-      </ng-container>
-  
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="vaccine">
-        <th mat-header-cell *matHeaderCellDef class="text-primary fw-bolder fs-6"> Vaccine </th>
-        <td mat-cell *matCellDef="let element"><span class="badge rounded-pill bg-success">{{element.vaccine}}</span> <span matBadge="{{element.available_capacity}}" matBadgeOverlap="false"></span> </td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+  <div class="container">
+    <div class="row">
+      <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-6">
+        <mat-label>Please Select Options</mat-label>
+        <mat-select (selectionChange)="stateChange($event)" [(ngModel)]="value">
+          <mat-option *ngFor="let option of Options" [value]="option.id">
+            {{option.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div class="row">
+
+      <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-3" *ngIf="value == 1">
+        <mat-label>Select State</mat-label>
+        <mat-select (selectionChange)="stateChange($event)">
+          <mat-option *ngFor="let state of States.states" [value]="state.state_id">
+            {{state.state_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-3" *ngIf="value == 1">
+        <mat-label>Select Districts</mat-label>
+        <mat-select [(ngModel)]="selectedDistrict">
+          <mat-option *ngFor="let dist of Districts.districts" [value]="dist.district_id">
+            {{dist.district_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-3" *ngIf="value == 1 || value == 2">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="dateValue">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-3" *ngIf="value == 2">
+        <mat-label>Pincode</mat-label>
+        <input matInput type="text" [(ngModel)]="pincode">
+        <button mat-button *ngIf="pincode" matSuffix mat-icon-button aria-label="Clear" (click)="pincode=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <section>
+      <div class="row justify-content-center">
+        <div>
+          <button mat-raised-button class="btn btn-primary" (click)="findByDistrict()"
+            *ngIf="value == 1 || value == 2">Search</button>
+        </div>
+      </div>
+    </section>
   </div>
+</div>
+<div class="mat-elevation-z8 container" *ngIf="this.dataSource?.data ">
+
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef class="text-primary fw-bolder fs-6"> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}}, {{element.address}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="slots">
+      <th mat-header-cell *matHeaderCellDef class="text-primary fw-bolder fs-6"> Slots </th>
+      <td mat-cell *matCellDef="let element"> {{element.slots}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="fee">
+      <th mat-header-cell *matHeaderCellDef class="text-primary fw-bolder fs-6"> Fee </th>
+      <td mat-cell *matCellDef="let element"><span class="badge rounded-pill bg-success">{{element.fee_type}}</span>
+        <span *ngIf="element.fee > 0" matBadge="{{element.fee}}" matBadgeOverlap="false"> </span>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="vaccine">
+      <th mat-header-cell *matHeaderCellDef class="text-primary fw-bolder fs-6"> Vaccine </th>
+      <td mat-cell *matCellDef="let element"><span class="badge rounded-pill bg-success">{{element.vaccine}}</span>
+        <span matBadge="{{element.available_capacity}}" matBadgeOverlap="false"></span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

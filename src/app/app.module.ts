@@ -22,6 +22,7 @@ import { DatePipe } from '@angular/common';
 import { VaccineDetailsComponent } from './vaccine-details/vaccine-details.component';
 import { HospitalsIndiaComponent } from './hospitals-india/hospitals-india.component';
 import { MatSortModule } from '@angular/material/sort';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { MatSortModule } from '@angular/material/sort';
     FormsModule,
     MatBadgeModule,
     MatProgressSpinnerModule,
-    MatSortModule
+    MatSortModule,
+    NgxChartsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

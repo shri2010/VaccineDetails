@@ -28,6 +28,16 @@ export class VaccineDetailsComponent implements OnInit {
   SessionsData: SessionsData = { sessions: [] };
   dateValue: any;
   Options: any[] = [{ id: 1, name: 'By District' }, { id: 2, name: 'By Pincode' }];
+  single: any[];
+  view: any = [400, 400];
+
+  // options
+  showLegend: boolean = true;
+  showLabels: boolean = true;
+
+  colorScheme = {
+    domain: ['#5AA454', '#E44D25']
+  };
 
 
   constructor(private cowinService: CowinService, private datePipe: DatePipe
@@ -39,15 +49,33 @@ export class VaccineDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.cowinService.getDetailsForVaccine().subscribe(
+      {
+        next: (result: any) => {
+          debugger;
+this.single=[];
+          this.single.push({name:'male',value:result.topBlock.vaccination.male});
+          this.single.push({name:'female',value:result.topBlock.vaccination.female});
+
+
+          console.log(result);
+        },
+        error: (result: any) => console.log(result)
+      })
+
     this.cowinService.getStates().subscribe(
       {
         next: (result: States) => {
-          
+
           this.States = result;
           console.log(result);
         },
         error: (result: any) => console.log(result)
       })
+  }
+
+  onSelect(event: any) {
+    console.log(event);
   }
 
   stateChange(event: MatSelectChange) {
@@ -56,7 +84,7 @@ export class VaccineDetailsComponent implements OnInit {
 
       {
         next: (result: Districts) => {
-          
+
           this.Districts = result;
           console.log(result);
         },
@@ -66,13 +94,13 @@ export class VaccineDetailsComponent implements OnInit {
 
   findByDistrict() {
     if (this.value === 0) {
-      this.toast.open('Please Select Option', '', { horizontalPosition: 'right', verticalPosition: 'top', duration:750 });
+      this.toast.open('Please Select Option', '', { horizontalPosition: 'right', verticalPosition: 'top', duration: 750 });
 
     }
     else if (this.value === 1) {
 
       if (this.selectedDistrict === 0) {
-        this.toast.open('Please Select District', '', { horizontalPosition: 'right', verticalPosition: 'top' , duration:750});
+        this.toast.open('Please Select District', '', { horizontalPosition: 'right', verticalPosition: 'top', duration: 750 });
 
       }
 
@@ -82,7 +110,7 @@ export class VaccineDetailsComponent implements OnInit {
         this.cowinService.findByDistrict(this.selectedDistrict, date).subscribe(
           {
             next: (result: SessionsData) => {
-              
+
               this.dataSource = new MatTableDataSource(result.sessions);
 
               this.dataSource.paginator = this.paginator;
@@ -95,7 +123,7 @@ export class VaccineDetailsComponent implements OnInit {
 
     } else if (this.value === 2) {
       if (this.pincode === '' || this.pincode === undefined) {
-        this.toast.open('Please Provide Pincode', '', { horizontalPosition: 'right', verticalPosition: 'top', duration:750 });
+        this.toast.open('Please Provide Pincode', '', { horizontalPosition: 'right', verticalPosition: 'top', duration: 750 });
 
       }
       else {
@@ -104,7 +132,7 @@ export class VaccineDetailsComponent implements OnInit {
         this.cowinService.findByPincode(this.pincode, date).subscribe(
           {
             next: (result: SessionsData) => {
-              
+
               this.dataSource = new MatTableDataSource(result.sessions);
               this.dataSource.paginator = this.paginator;
               this.dataSource.sort = this.sort;
