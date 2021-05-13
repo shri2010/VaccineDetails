@@ -1,14 +1,33 @@
 <div class="jumbotron pb-4">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 col-lg-6 col-10">
-        <ngx-charts-pie-grid [view]="view" [scheme]="colorScheme" [results]="single" (select)="onSelect($event)">
-        </ngx-charts-pie-grid>
-      </div>
-    </div>
-  </div>
+
 
   <div class="container">
+
+    <div class="row" *ngIf="resultValue">
+      <div class="p-2 col-md-12 col-lg-3">
+        <mat-card class="bg-info">Male Vaccinated: {{resultValue.topBlock.vaccination.male}}</mat-card>
+      </div> 
+      <div class="p-2 col-md-12 col-lg-3">
+        <mat-card class="bg-warning">Female Vaccinated: {{resultValue.topBlock.vaccination.female}}</mat-card>
+      </div>
+     
+      
+    </div>
+    <div class="row" *ngIf="resultValue">
+      <div class="p-2 col-md-12 col-lg-3">
+        <mat-card class="bg-info">Above 60: {{resultValue.vaccinationByAge.above_60}}</mat-card>
+      </div> 
+      <div class="p-2 col-md-12 col-lg-3">
+        <mat-card class="bg-warning">Between 18 & 30: {{resultValue.vaccinationByAge.vac_18_30}}</mat-card>
+      </div>
+      <div class="p-2 col-md-12 col-lg-3">
+        <mat-card class="bg-info">Between 30 & 45: {{resultValue.vaccinationByAge.vac_30_45}}</mat-card>
+      </div> 
+      <div class="p-2 col-md-12 col-lg-3">
+        <mat-card class="bg-warning">Between 45 & 60: {{resultValue.vaccinationByAge.vac_45_60}}</mat-card>
+      </div>
+      
+    </div>
     <div class="row">
       <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-6">
         <mat-label>Please Select Options</mat-label>

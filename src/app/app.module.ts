@@ -18,6 +18,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatCardModule} from '@angular/material/card';
 import { DatePipe } from '@angular/common';
 import { VaccineDetailsComponent } from './vaccine-details/vaccine-details.component';
 import { HospitalsIndiaComponent } from './hospitals-india/hospitals-india.component';
@@ -50,7 +51,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatBadgeModule,
     MatProgressSpinnerModule,
     MatSortModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MatCardModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

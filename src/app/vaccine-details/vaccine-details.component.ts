@@ -5,6 +5,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { map } from 'rxjs/operators';
 import { Districts, States, SessionsData, AvailableSession } from '../models';
 import { CowinService } from '../Services/cowin.service';
 
@@ -29,16 +30,15 @@ export class VaccineDetailsComponent implements OnInit {
   dateValue: any;
   Options: any[] = [{ id: 1, name: 'By District' }, { id: 2, name: 'By Pincode' }];
   single: any[];
-  view: any = [400, 400];
+  view: any = [1200, 150];
+  stateValues: any[];
+  resultValue:any;
+  
+
 
   // options
-  showLegend: boolean = true;
-  showLabels: boolean = true;
 
-  colorScheme = {
-    domain: ['#5AA454', '#E44D25']
-  };
-
+  colorScheme = 'picnic';
 
   constructor(private cowinService: CowinService, private datePipe: DatePipe
     , private toast: MatSnackBar) {
@@ -52,11 +52,15 @@ export class VaccineDetailsComponent implements OnInit {
     this.cowinService.getDetailsForVaccine().subscribe(
       {
         next: (result: any) => {
-          debugger;
-this.single=[];
-          this.single.push({name:'male',value:result.topBlock.vaccination.male});
-          this.single.push({name:'female',value:result.topBlock.vaccination.female});
-
+          this.resultValue= result;
+          this.single = [];
+          this.single.push({ name: 'Male', value: result.topBlock.vaccination.male });
+          this.single.push({ name: 'Female', value: result.topBlock.vaccination.female });
+         
+          this.single.push({ name: 'Above 60', value: result.vaccinationByAge.above_60 });
+          this.single.push({ name: 'Between 18 & 30', value: result.vaccinationByAge.vac_18_30 });
+          this.single.push({ name: 'Between 30 & 45', value: result.vaccinationByAge.vac_30_45 });
+          this.single.push({ name: 'Between 45 & 60', value: result.vaccinationByAge.vac_45_60 });
 
           console.log(result);
         },
