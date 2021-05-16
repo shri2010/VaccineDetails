@@ -6,27 +6,63 @@
     <div class="row" *ngIf="resultValue">
       <div class="p-2 col-md-12 col-lg-3">
         <mat-card class="bg-info">Male Vaccinated: {{resultValue.topBlock.vaccination.male}}</mat-card>
-      </div> 
+      </div>
       <div class="p-2 col-md-12 col-lg-3">
         <mat-card class="bg-warning">Female Vaccinated: {{resultValue.topBlock.vaccination.female}}</mat-card>
       </div>
-     
-      
+
+
     </div>
     <div class="row" *ngIf="resultValue">
       <div class="p-2 col-md-12 col-lg-3">
-        <mat-card class="bg-info">Above 60: {{resultValue.vaccinationByAge.above_60}}</mat-card>
-      </div> 
-      <div class="p-2 col-md-12 col-lg-3">
-        <mat-card class="bg-warning">Between 18 & 30: {{resultValue.vaccinationByAge.vac_18_30}}</mat-card>
+        <mat-card class="bg-info">
+          <mat-card-header>
+            <mat-card-title>
+              Above 60
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            {{resultValue.vaccinationByAge.above_60}}
+          </mat-card-content>
+        </mat-card>
       </div>
       <div class="p-2 col-md-12 col-lg-3">
-        <mat-card class="bg-info">Between 30 & 45: {{resultValue.vaccinationByAge.vac_30_45}}</mat-card>
-      </div> 
-      <div class="p-2 col-md-12 col-lg-3">
-        <mat-card class="bg-warning">Between 45 & 60: {{resultValue.vaccinationByAge.vac_45_60}}</mat-card>
+        <mat-card class="bg-warning">
+          <mat-card-header>
+            <mat-card-title>
+              Between 18 & 30
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            {{resultValue.vaccinationByAge.vac_18_30}}
+          </mat-card-content>
+        </mat-card>
       </div>
-      
+      <div class="p-2 col-md-12 col-lg-3">
+        <mat-card class="bg-info">
+          <mat-card-header>
+            <mat-card-title>
+              Between 30 & 45
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            {{resultValue.vaccinationByAge.vac_30_45}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="p-2 col-md-12 col-lg-3">
+        <mat-card class="bg-warning">
+          <mat-card-header>
+            <mat-card-title>
+              Between 45 & 60
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            {{resultValue.vaccinationByAge.vac_45_60}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+
     </div>
     <div class="row">
       <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-6">
