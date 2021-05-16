@@ -5,10 +5,28 @@
 
     <div class="row" *ngIf="resultValue">
       <div class="p-2 col-md-12 col-lg-3">
-        <mat-card class="bg-info">Male Vaccinated: {{resultValue.topBlock.vaccination.male}}</mat-card>
+        <mat-card class="bg-info">
+          <mat-card-header>
+            <mat-card-title>
+              Male Vaccinated
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            {{resultValue.topBlock.vaccination.male}}
+          </mat-card-content>
+        </mat-card>
       </div>
       <div class="p-2 col-md-12 col-lg-3">
-        <mat-card class="bg-warning">Female Vaccinated: {{resultValue.topBlock.vaccination.female}}</mat-card>
+        <mat-card class="bg-warning">
+          <mat-card-header>
+            <mat-card-title>
+              Female Vaccinated
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            {{resultValue.topBlock.vaccination.female}}
+          </mat-card-content>
+        </mat-card>
       </div>
 
 
