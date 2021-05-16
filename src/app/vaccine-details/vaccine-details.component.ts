@@ -53,14 +53,7 @@ export class VaccineDetailsComponent implements OnInit {
       {
         next: (result: any) => {
           this.resultValue= result;
-          this.single = [];
-          this.single.push({ name: 'Male', value: result.topBlock.vaccination.male });
-          this.single.push({ name: 'Female', value: result.topBlock.vaccination.female });
          
-          this.single.push({ name: 'Above 60', value: result.vaccinationByAge.above_60 });
-          this.single.push({ name: 'Between 18 & 30', value: result.vaccinationByAge.vac_18_30 });
-          this.single.push({ name: 'Between 30 & 45', value: result.vaccinationByAge.vac_30_45 });
-          this.single.push({ name: 'Between 45 & 60', value: result.vaccinationByAge.vac_45_60 });
 
           console.log(result);
         },

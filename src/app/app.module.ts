@@ -24,12 +24,14 @@ import { VaccineDetailsComponent } from './vaccine-details/vaccine-details.compo
 import { HospitalsIndiaComponent } from './hospitals-india/hospitals-india.component';
 import { MatSortModule } from '@angular/material/sort';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { CovidTestingLabsComponent } from './covid-testing-labs/covid-testing-labs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VaccineDetailsComponent,
-    HospitalsIndiaComponent
+    HospitalsIndiaComponent,
+    CovidTestingLabsComponent
   ],
   imports: [
     BrowserModule,

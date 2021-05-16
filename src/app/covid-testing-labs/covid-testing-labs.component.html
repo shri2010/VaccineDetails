@@ -1,0 +1,47 @@
+<div class="jumbotron pb-4">
+    <div class="container">
+        <div class="row">
+
+            <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-3">
+                <mat-label>Select State</mat-label>
+                <mat-select (selectionChange)="stateChange($event)">
+                    <mat-option *ngFor="let state of States" [value]="state.state_id">
+                        {{state.state_name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="p-2 col-md-12 col-lg-3">
+                <mat-label>Select Test Category</mat-label>
+                <mat-select [(ngModel)]="selectTestCategory">
+                    <mat-option *ngFor="let cat of TestCategory" [value]="cat">
+                        {{cat}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <section>
+            <div class="row justify-content-center">
+                <div>
+                    <button mat-raised-button class="btn btn-primary" (click)="Result()">Search</button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="container">
+        <div class="row" *ngIf="result">
+            <div class="p-2 col-md-12 col-lg-6" *ngIf="result.Govt">
+              <mat-card class="bg-info">
+                  <mat-card-header><mat-card-title>Govt Institute:</mat-card-title></mat-card-header>
+                   <mat-card-content>{{result.Govt}}</mat-card-content>
+                </mat-card>
+            </div> 
+            <div class="p-2 col-md-12 col-lg-6" *ngIf="result.Private">
+                <mat-card class="bg-info">
+                    <mat-card-header><mat-card-title>Private Institute:</mat-card-title></mat-card-header>
+                     <mat-card-content>{{result.Private}}</mat-card-content>
+                  </mat-card>
+            </div>
+    </div>
+</div>
