@@ -14,11 +14,12 @@ export class CovidTestingLabsComponent implements OnInit {
   labsData: any[] = labsData;
   States: any[];
   TestCategory: string[];
-  selectTestCategory: string;
+  selectTestCategory: string = '';
   filterData: any[];
-  selectedState: string;
+  selectedState: string = '';
   result: any;
-
+  govtArray: string[] = [];
+  privArray: string[] = [];
   constructor(private dataService: CowinService) { }
 
   ngOnInit(): void {
@@ -36,17 +37,25 @@ export class CovidTestingLabsComponent implements OnInit {
   }
 
   Result() {
-    debugger;
     this.filterData = this.labsData.filter(x => x["S.\r\nNo."] === this.selectedState && x["Test Category"] === this.selectTestCategory).map(
       x => { return { Govt: x["Names of Government Institutes"], Private: x["Names of Private Institutes"] } }
     );
 
     this.result = {};
+    this.govtArray=[];
+    this.privArray=[];
 
     this.filterData.forEach(x => {
+      if (x.Govt !== undefined && x.Govt !== '') {
+        this.govtArray=this.govtArray.concat(x.Govt.split('\r\n'));
+      }
+
+      if (x.Private !== undefined && x.Private !== '') {
+        this.privArray=this.privArray.concat(x.Private.split('\r\n'));
+      }
       this.result.Govt = (this.result.Govt || '') + (x.Govt || '');
 
-      this.result.Private = (this.result.Private || '') +( x.Private||'');
+      this.result.Private = (this.result.Private || '') + (x.Private || '');
     })
 
 

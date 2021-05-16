@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
 import { CdkTableModule } from '@angular/cdk/table';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -19,6 +20,7 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { DatePipe } from '@angular/common';
 import { VaccineDetailsComponent } from './vaccine-details/vaccine-details.component';
 import { HospitalsIndiaComponent } from './hospitals-india/hospitals-india.component';
@@ -54,7 +56,9 @@ import { CovidTestingLabsComponent } from './covid-testing-labs/covid-testing-la
     MatProgressSpinnerModule,
     MatSortModule,
     NgxChartsModule,
-    MatCardModule
+    MatCardModule,
+    MatListModule,
+    MatAutocompleteModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

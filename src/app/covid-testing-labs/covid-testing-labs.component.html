@@ -22,7 +22,7 @@
         </div>
 
         <section>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center" *ngIf="selectTestCategory !=='' && selectedState !== '' ">
                 <div>
                     <button mat-raised-button class="btn btn-primary" (click)="Result()">Search</button>
                 </div>
@@ -32,16 +32,31 @@
     <div class="container">
         <div class="row" *ngIf="result">
             <div class="p-2 col-md-12 col-lg-6" *ngIf="result.Govt">
-              <mat-card class="bg-info">
-                  <mat-card-header><mat-card-title>Govt Institute:</mat-card-title></mat-card-header>
-                   <mat-card-content>{{result.Govt}}</mat-card-content>
-                </mat-card>
-            </div> 
+                <mat-card class="bg-info">
+                    <mat-card-header>
+                        <mat-card-title>Govt Institute:</mat-card-title>
+                    </mat-card-header>
+
+                    
+                <ul>
+                    <li *ngFor="let govt of govtArray">
+                    {{govt}}
+                    </li>
+                </ul>
+            </mat-card>
+            </div>
             <div class="p-2 col-md-12 col-lg-6" *ngIf="result.Private">
                 <mat-card class="bg-warning">
-                    <mat-card-header><mat-card-title>Private Institute:</mat-card-title></mat-card-header>
-                     <mat-card-content>{{result.Private}}</mat-card-content>
-                  </mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Private Institute:</mat-card-title>
+                    </mat-card-header>
+
+                    <ul>
+                        <li *ngFor="let priv of privArray">
+                        {{priv}}
+                        </li>
+                    </ul>
+                </mat-card>
             </div>
+        </div>
     </div>
-</div>
